@@ -1,0 +1,46 @@
+{% extends 'gameapp/base.html' %}
+
+{% block content %}
+    <h5>One random quote..... Guess who said it..... U will be given only 4 attempts !!</h5>
+    <p><i>{{ quote }}</i></p>
+    <h5 id='guess_statement'></h5>
+<form id='user_form' method='POST' action=''>
+    {% csrf_token %}
+    <h6>
+        <label for="id_user_answer">User Answer:</label>
+        <input type="text" name="user_answer" maxlength="100" required id="id_user_answer" style="height:30px">
+        <button type = "submit" class="btn btn-sm btn-dark">Guess</button>
+    </h6>
+</form><br>
+<h5 id='ans'></h5>
+<ul id='hint'></ul>
+{% endblock content %}
+
+{% block javascript %}
+<script>
+    $("#user_form").submit(function(e){
+        console.log("Submitting the form");
+        e.preventDefault();
+        //get the form data
+        var formdata = {
+            'user_answer':$('#id_user_answer').val(),
+            csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+            contentType: 'application/x-www-form-urlencoded',
+            encode: true,
+        };
+        console.log(formdata)
+        $.ajax({
+            type: 'POST',
+            url: '{% url "gameapp:actualgame" %}',
+            data: formdata,
+            dataType: 'json',
+        }).done(function (data) {
+            $(function() {
+                $('#ans').text(data['data']);
+                $('#guess_statement').html('<h5>Guesses remaining: '+data['rem']+'</h5>');
+                $('#hint').append('<li>'+data['hint']+'</li>');
+            });
+        });
+    });
+</script>
+{% endblock javascript %}

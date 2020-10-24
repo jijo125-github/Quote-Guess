@@ -1,0 +1,22 @@
+{% extends 'gameapp/base.html' %}
+
+{% block content %}
+    <h4>What would u like to do?
+        <span><a href={%url 'gameapp:scraper' %} class="btn btn-md btn-primary"><i>Scrape</i></a></span>
+        <span><a href={%url 'gameapp:game' %} class="btn btn-md btn-primary"><i>Play</i></a></span>
+    </h4>
+
+    {% if scraped %}
+        <p>{{ scraped }}</p>
+    {% endif %}
+
+    <div>
+        <h5>Some Authors:</h5>
+        {% for i in authors %}
+                <a href={% url 'gameapp:authorquotes' author=i.author %}>
+                    <span class="border border-light">{{ i.author }}</span>
+                </a>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   
+        {% endfor %}
+    </div> 
+{% endblock content %}

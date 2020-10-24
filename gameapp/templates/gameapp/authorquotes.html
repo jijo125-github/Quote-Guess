@@ -1,0 +1,14 @@
+{% extends 'gameapp/base.html' %} 
+
+{% block content %}
+    <div>
+        <h5>These are the famous quotes by {{ author }} :--</h5>
+        {% for quote in quotes %}
+        <div>
+            <ul>
+                <li>{{ quote.text }}</li>
+            </ul>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock content %}
