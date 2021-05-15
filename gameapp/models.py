@@ -12,4 +12,3 @@ class Quotes(models.Model):
     biolink = models.CharField(max_length=500)
     author_born = models.CharField(max_length=1000)
     author_location = models.CharField(max_length=1000)
-

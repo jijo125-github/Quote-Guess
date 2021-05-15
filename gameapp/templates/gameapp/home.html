@@ -2,12 +2,12 @@
 
 {% block content %}
     <h4>What would u like to do?
-        <span><a href={%url 'gameapp:scraper' %} class="btn btn-md btn-primary"><i>Scrape</i></a></span>
+        <span><a href={%url 'gameapp:scraper' %} class="btn btn-md btn-primary disabled"><i>Scrape</i></a></span>
         <span><a href={%url 'gameapp:game' %} class="btn btn-md btn-primary"><i>Play</i></a></span>
     </h4>
 
     {% if scraped %}
-        <p>{{ scraped }}</p>
+        <p>{{ message }}</p>
     {% endif %}
 
     <div>

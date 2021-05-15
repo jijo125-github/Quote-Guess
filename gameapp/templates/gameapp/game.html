@@ -28,15 +28,16 @@
             contentType: 'application/x-www-form-urlencoded',
             encode: true,
         };
-        console.log(formdata)
+        // console.log(formdata)
         $.ajax({
             type: 'POST',
             url: '{% url "gameapp:actualgame" %}',
             data: formdata,
             dataType: 'json',
         }).done(function (data) {
+            // console.log(data);
             $(function() {
-                $('#ans').text(data['data']);
+                $('#ans').text(data['ans']);
                 $('#guess_statement').html('<h5>Guesses remaining: '+data['rem']+'</h5>');
                 $('#hint').append('<li>'+data['hint']+'</li>');
             });
